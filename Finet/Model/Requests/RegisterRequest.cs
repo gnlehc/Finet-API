@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Finet.HttpModels.Requests
+namespace Finet.Model.Requests
 {
-    public class LoginRequest
+    public class RegisterRequest
     {
         [Required] public string Email { get; set; }
 

@@ -1,6 +1,7 @@
 ﻿using Finet.Helpers;
-using Finet.HttpModels.Requests;
-using Finet.HttpModels.Responses;
+using Finet.Model.Requests;
+using Finet.Model.Responses;
+using Finet.Output;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Finet.Services
@@ -19,41 +20,44 @@ namespace Finet.Services
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult UserRegister([FromBody] RegisterRequest request)
         {
-            ServerResponse response = new ServerResponse();
-
+            UserOutput userOutput = new UserOutput();
             try
             {
-                response = _userHelper.RegisterHelper(request);
-                if (response.statusCode == 200)
+                userOutput.Users = _userHelper.RegisterHelper(request);
+                if (userOutput.Users.statusCode == 200)
                 {
-                    return new OkObjectResult(response);
+                    return new OkObjectResult(userOutput.Users);
                 }
 
             }
             catch (Exception ex)
             {
-                var errorResponse = new ServerResponse
+                var errorResponse = new UserOutput
                 {
-                    statusCode = 500,
-                    message = "An error occurred while adding user."
+                    Users = new ServerResponse
+                    {
+                        statusCode = 500,
+                        message = "An error occurred while adding user."
+                    }
                 };
-               
-                return new ObjectResult(errorResponse)
+                return new ObjectResult(errorResponse.Users)
                 {
-                    StatusCode = errorResponse.statusCode
+                    StatusCode = errorResponse.Users.statusCode
                 };
             }
 
 
-            var specificErrorResponse = new ServerResponse
+            var specificErrorResponse = new UserOutput
             {
-                statusCode = 400,
-                message = "User add failed due to a specific reason."
-                
+                Users = new ServerResponse
+                {
+                    statusCode = 400,
+                    message = "User add failed due to a specific reason."
+                }
             };
-            return new ObjectResult(specificErrorResponse)
+            return new ObjectResult(specificErrorResponse.Users)
             {
-                StatusCode = specificErrorResponse.statusCode
+                StatusCode = specificErrorResponse.Users.statusCode
             };
 
         }
@@ -63,9 +67,10 @@ namespace Finet.Services
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult UserLogin([FromBody] LoginRequest request)
         {
-            LoginResponse response = new LoginResponse();
-            response = _userHelper.LoginHelper(request);
-            return new OkObjectResult(response);
+            
+            UserOutput userOutput = new UserOutput();
+            userOutput.Users = _userHelper.LoginHelper(request);
+            return new OkObjectResult(userOutput.Users);
         }
     }
 }

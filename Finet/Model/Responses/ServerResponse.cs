@@ -1,4 +1,4 @@
-﻿namespace Finet.HttpModels.Responses
+﻿namespace Finet.Model.Responses
 {
     public class ServerResponse
     {

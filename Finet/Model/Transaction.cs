@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Finet.Schemas
+namespace Finet.Model
 {
     public class Transaction
     {

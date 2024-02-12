@@ -1,4 +1,4 @@
-﻿using Finet.Schemas;
+﻿using Finet.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace Finet.Context

@@ -1,7 +1,7 @@
 ﻿using Finet.Context;
-using Finet.HttpModels.Requests;
-using Finet.HttpModels.Responses;
-using Finet.Schemas;
+using Finet.Model.Requests;
+using Finet.Model.Responses;
+using Finet.Model;
 
 namespace Finet.Helpers
 {
