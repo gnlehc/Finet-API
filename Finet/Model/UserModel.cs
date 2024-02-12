@@ -2,7 +2,7 @@
 
 namespace Finet.Model
 {
-    public class User
+    public class UserModel
     {
         [Key] [Required]
         public Guid Id { get; set; }

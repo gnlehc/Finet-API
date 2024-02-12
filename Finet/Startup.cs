@@ -15,7 +15,7 @@ namespace Finet
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<UserContext>(options =>
+            services.AddDbContext<FinetContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("Finet"));
                 options.EnableSensitiveDataLogging();

@@ -20,44 +20,40 @@ namespace Finet.Services
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult UserRegister([FromBody] RegisterRequest request)
         {
-            UserOutput userOutput = new UserOutput();
+            BaseOutput output = new BaseOutput();
             try
             {
-                userOutput.Users = _userHelper.RegisterHelper(request);
-                if (userOutput.Users.statusCode == 200)
+                output = _userHelper.RegisterHelper(request);
+                if (output.statusCode == 200)
                 {
-                    return new OkObjectResult(userOutput.Users);
+                    return new OkObjectResult(output);
                 }
 
             }
             catch (Exception ex)
             {
-                var errorResponse = new UserOutput
+                var errorResponse = new BaseOutput
                 {
-                    Users = new ServerResponse
-                    {
-                        statusCode = 500,
-                        message = "An error occurred while adding user."
-                    }
+                    statusCode = 500,
+                    message = ex.Message
                 };
-                return new ObjectResult(errorResponse.Users)
+                   
+                return new ObjectResult(errorResponse)
                 {
-                    StatusCode = errorResponse.Users.statusCode
+                    StatusCode = errorResponse.statusCode
                 };
             }
 
 
-            var specificErrorResponse = new UserOutput
+            var specificErrorResponse = new BaseOutput
             {
-                Users = new ServerResponse
-                {
-                    statusCode = 400,
-                    message = "User add failed due to a specific reason."
-                }
+                 statusCode = 400,
+                 message = "User add failed due to a specific reason."
+                
             };
-            return new ObjectResult(specificErrorResponse.Users)
+            return new ObjectResult(specificErrorResponse)
             {
-                StatusCode = specificErrorResponse.Users.statusCode
+                StatusCode = specificErrorResponse.statusCode
             };
 
         }
@@ -68,9 +64,8 @@ namespace Finet.Services
         public IActionResult UserLogin([FromBody] LoginRequest request)
         {
             
-            UserOutput userOutput = new UserOutput();
-            userOutput.Users = _userHelper.LoginHelper(request);
-            return new OkObjectResult(userOutput.Users);
+            LoginResponse response = _userHelper.LoginHelper(request);
+            return new OkObjectResult(response);
         }
     }
 }
