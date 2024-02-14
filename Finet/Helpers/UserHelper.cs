@@ -1,22 +1,23 @@
 ﻿using Finet.Context;
-using Finet.HttpModels.Requests;
-using Finet.HttpModels.Responses;
-using Finet.Schemas;
+using Finet.Model.Requests;
+using Finet.Model.Responses;
+using Finet.Output;
+using Finet.Model;
 
 namespace Finet.Helpers
 {
     public class UserHelper
     {
-        private readonly UserContext _userContext;
+        private readonly FinetContext _userContext;
 
-        public UserHelper(UserContext userContext)
+        public UserHelper(FinetContext userContext)
         {
             _userContext = userContext;
         }
 
-        public ServerResponse RegisterHelper(RegisterRequest request)
+        public BaseOutput RegisterHelper(RegisterRequest request)
         {
-            ServerResponse response = new ServerResponse();
+            BaseOutput response = new BaseOutput();
             try
             {
 
@@ -28,7 +29,7 @@ namespace Finet.Helpers
                     return response;
                 }
 
-                var user = new User();
+                var user = new UserModel();
                 user.Id = Guid.NewGuid();
                 string email = request.Email;
                 string[] parts = email.Split('@');

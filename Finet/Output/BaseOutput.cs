@@ -1,6 +1,6 @@
-﻿namespace Finet.HttpModels.Responses
+﻿namespace Finet.Output
 {
-    public class ServerResponse
+    public class BaseOutput
     {
         public string message { get; set; }
         public int statusCode { get; set; }

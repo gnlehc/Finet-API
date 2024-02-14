@@ -1,6 +1,7 @@
 ﻿using Finet.Helpers;
-using Finet.HttpModels.Requests;
-using Finet.HttpModels.Responses;
+using Finet.Model.Requests;
+using Finet.Model.Responses;
+using Finet.Output;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Finet.Services
@@ -19,25 +20,24 @@ namespace Finet.Services
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult UserRegister([FromBody] RegisterRequest request)
         {
-            ServerResponse response = new ServerResponse();
-
+            BaseOutput output = new BaseOutput();
             try
             {
-                response = _userHelper.RegisterHelper(request);
-                if (response.statusCode == 200)
+                output = _userHelper.RegisterHelper(request);
+                if (output.statusCode == 200)
                 {
-                    return new OkObjectResult(response);
+                    return new OkObjectResult(output);
                 }
 
             }
             catch (Exception ex)
             {
-                var errorResponse = new ServerResponse
+                var errorResponse = new BaseOutput
                 {
                     statusCode = 500,
-                    message = "An error occurred while adding user."
+                    message = ex.Message
                 };
-               
+                   
                 return new ObjectResult(errorResponse)
                 {
                     StatusCode = errorResponse.statusCode
@@ -45,10 +45,10 @@ namespace Finet.Services
             }
 
 
-            var specificErrorResponse = new ServerResponse
+            var specificErrorResponse = new BaseOutput
             {
-                statusCode = 400,
-                message = "User add failed due to a specific reason."
+                 statusCode = 400,
+                 message = "User add failed due to a specific reason."
                 
             };
             return new ObjectResult(specificErrorResponse)
@@ -63,8 +63,8 @@ namespace Finet.Services
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult UserLogin([FromBody] LoginRequest request)
         {
-            LoginResponse response = new LoginResponse();
-            response = _userHelper.LoginHelper(request);
+            
+            LoginResponse response = _userHelper.LoginHelper(request);
             return new OkObjectResult(response);
         }
     }

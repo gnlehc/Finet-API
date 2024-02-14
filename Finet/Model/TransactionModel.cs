@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Finet.Schemas
+namespace Finet.Model
 {
-    public class Transaction
+    public class TransactionModel
     {
         [Required]
         public String title { get; set; }
