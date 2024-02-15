@@ -17,8 +17,14 @@ builder.Services.AddCors(options =>
                           policy.WithOrigins("http://10.0.2.2:5000");
                       });
 });
-builder.Services.AddScoped<UserHelper>();
-builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<MsUserHelper>();
+builder.Services.AddScoped<MsUserService>();
+builder.Services.AddScoped<MsCategoryHelper>();
+builder.Services.AddScoped<MsCategoryService>();
+builder.Services.AddScoped<MsAccountHelper>();
+builder.Services.AddScoped<MsAccountService>();
+builder.Services.AddScoped<TrExpenseHelper>();
+builder.Services.AddScoped<TrExpenseService>();
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

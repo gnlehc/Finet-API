@@ -6,13 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Finet.Services
 {
-    public class UserService : ControllerBase
+    public class MsUserService : ControllerBase
     {
-        public UserHelper _userHelper;
+        public MsUserHelper _userHelper;
         private ILogger logger;
      
 
-        public UserService(UserHelper userHelper, ILogger<UserService> logger) : base()
+        public MsUserService(MsUserHelper userHelper, ILogger<MsUserService> logger) : base()
         {
             this._userHelper = userHelper;
             this.logger = logger;
@@ -21,7 +21,7 @@ namespace Finet.Services
         [HttpPost]
         [Route("api/register")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult UserRegister([FromBody] RegisterRequest request)
+        public IActionResult UserRegister([FromBody] RegisterRequestDTO request)
         {
             try
             {
@@ -39,11 +39,11 @@ namespace Finet.Services
         [HttpPost]
         [Route("api/login")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult UserLogin([FromBody] LoginRequest request)
+        public IActionResult UserLogin([FromBody] LoginRequestDTO request)
         {
             try
             {
-                LoginResponse loginResponse = new LoginResponse();
+                LoginResponseDTO loginResponse = new LoginResponseDTO();
                 loginResponse = _userHelper.LoginHelper(request);
                 return new OkObjectResult(loginResponse);
             }

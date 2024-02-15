@@ -7,16 +7,16 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Finet.Helpers
 {
-    public class UserHelper
+    public class MsUserHelper
     {
         private readonly FinetContext _userContext;
 
-        public UserHelper(FinetContext userContext)
+        public MsUserHelper(FinetContext userContext)
         {
             _userContext = userContext;
         }
 
-        public BaseOutput RegisterHelper(RegisterRequest request)
+        public BaseOutput RegisterHelper(RegisterRequestDTO request)
         {
             BaseOutput response = new BaseOutput();
             try
@@ -77,9 +77,9 @@ namespace Finet.Helpers
             }
         }
 
-        public LoginResponse LoginHelper(LoginRequest request)
+        public LoginResponseDTO LoginHelper(LoginRequestDTO request)
         {
-            LoginResponse response = new LoginResponse();
+            LoginResponseDTO response = new LoginResponseDTO();
             try
             {
                 if (request == null)

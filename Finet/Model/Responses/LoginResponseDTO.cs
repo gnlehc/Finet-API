@@ -1,6 +1,6 @@
 ﻿namespace Finet.Model.Responses
 {
-    public class LoginResponse
+    public class LoginResponseDTO
     {
         public int StatusCode { get; set; }
         public string? ErrorMessage { get; set; }

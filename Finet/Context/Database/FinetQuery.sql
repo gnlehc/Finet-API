@@ -1,3 +1,4 @@
+--FINETDB
 CREATE DATABASE FinetDB;
 
 USE FinetDB;
@@ -11,4 +12,36 @@ CREATE TABLE MsUser(
 
 SELECT *FROM MsUser;
 
+CREATE TABLE TrExpense(
+	[ExpenseID] UNIQUEIDENTIFIER PRIMARY KEY,
+	[AccountID] INT FOREIGN KEY REFERENCES MsAccount(AccountID),
+	[CategoryID] INT FOREIGN KEY REFERENCES MsCategory(CategoryID),
+	[Title] VARCHAR(255),
+	[Description] VARCHAR(255),
+	[Time] DATETIME,
+	[Stsrc] VARCHAR(1)
+);
+
+SELECT *FROM TrExpense;
+
+CREATE TABLE MsAccount(
+    [AccountID] INT PRIMARY KEY IDENTITY(1,1),
+    [AccountName] VARCHAR(255),
+	[Stsrc] VARCHAR(1)
+);
+
+SELECT *FROM MsAccount;
+
+CREATE TABLE MsCategory(
+	[CategoryID] INT PRIMARY KEY IDENTITY(1,1),
+	[CategoryName] VARCHAR(255),
+	[Stsrc] VARCHAR(1)
+);
+
+SELECT *FROM MsCategory;
+
+--DROP TABLE
 DROP TABLE MsUser;
+DROP TABLE TrExpense;
+DROP TABLE MsCategory;
+DROP TABLE MsAccount;

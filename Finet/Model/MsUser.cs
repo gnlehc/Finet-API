@@ -1,19 +1,22 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Finet.Model
 {
+    [Table("MsUser")]
     public class MsUser
     {
-        [Key] [Required]
+        [Key]
+        [Column("UserID")]
         public Guid UserID { get; set; }
 
-        [Required]
+        [Column("Username")]
         public string? Username { get; set; }
 
-        [Required]  
+        [Column("Email")]
         public string? Email { get; set; }
 
-        [Required]
+        [Column("Password")]
         public string? Password { get; set; }
     }
 }
