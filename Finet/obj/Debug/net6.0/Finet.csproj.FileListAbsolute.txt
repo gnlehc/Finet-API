@@ -93,8 +93,6 @@ C:\Users\Chelsea Ng\Finet-API\Finet\bin\Debug\net6.0\Finet.deps.json
 C:\Users\Chelsea Ng\Finet-API\Finet\bin\Debug\net6.0\Finet.runtimeconfig.json
 C:\Users\Chelsea Ng\Finet-API\Finet\bin\Debug\net6.0\Finet.dll
 C:\Users\Chelsea Ng\Finet-API\Finet\bin\Debug\net6.0\Finet.pdb
-C:\Users\Chelsea Ng\Finet-API\Finet\bin\Debug\net6.0\AutoMapper.dll
-C:\Users\Chelsea Ng\Finet-API\Finet\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\Chelsea Ng\Finet-API\Finet\bin\Debug\net6.0\Azure.Core.dll
 C:\Users\Chelsea Ng\Finet-API\Finet\bin\Debug\net6.0\Azure.Identity.dll
 C:\Users\Chelsea Ng\Finet-API\Finet\bin\Debug\net6.0\BCrypt.Net-Core.dll
@@ -176,3 +174,6 @@ C:\Users\Chelsea Ng\Finet-API\Finet\obj\Debug\net6.0\refint\Finet.dll
 C:\Users\Chelsea Ng\Finet-API\Finet\obj\Debug\net6.0\Finet.pdb
 C:\Users\Chelsea Ng\Finet-API\Finet\obj\Debug\net6.0\Finet.genruntimeconfig.cache
 C:\Users\Chelsea Ng\Finet-API\Finet\obj\Debug\net6.0\ref\Finet.dll
+C:\Users\Chelsea Ng\Finet-API\Finet\bin\Debug\net6.0\JWT.dll
+C:\Users\Chelsea Ng\Finet-API\Finet\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Chelsea Ng\Finet-API\Finet\bin\Debug\net6.0\Newtonsoft.Json.dll

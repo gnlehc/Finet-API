@@ -1,6 +1,7 @@
 ﻿using Finet.Helpers;
 using Finet.Model.Requests;
 using Finet.Output;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Finet.Services
@@ -16,6 +17,7 @@ namespace Finet.Services
             this.ECategoryHelper = ECategoryHelper;
             this.logger = logger;
         }
+
         [HttpPost]
         [Route("api/addExpenseCategory")]
         [ProducesResponseType(StatusCodes.Status200OK)]

@@ -3,6 +3,9 @@ using Finet.Model.Requests;
 using Finet.Model.Responses;
 using Finet.Output;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 
 namespace Finet.Services
 {
@@ -10,12 +13,12 @@ namespace Finet.Services
     {
         public MsUserHelper _userHelper;
         private ILogger logger;
-     
-
-        public MsUserService(MsUserHelper userHelper, ILogger<MsUserService> logger) : base()
+        private IConfiguration _config;
+        public MsUserService(MsUserHelper userHelper, ILogger<MsUserService> logger, IConfiguration config) : base()
         {
             this._userHelper = userHelper;
             this.logger = logger;
+            this._config = config;
         }
 
         [HttpPost]
@@ -45,7 +48,20 @@ namespace Finet.Services
             {
                 LoginResponseDTO loginResponse = new LoginResponseDTO();
                 loginResponse = _userHelper.LoginHelper(request);
-                return new OkObjectResult(loginResponse);
+                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+                var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+                var Sectoken = new JwtSecurityToken(_config["Jwt:Issuer"],
+                  _config["Jwt:Issuer"],
+                  null,
+                  expires: DateTime.Now.AddMinutes(120),
+                  signingCredentials: credentials);
+
+                var token = new JwtSecurityTokenHandler().WriteToken(Sectoken);
+                return Ok(new { Token = token, Data = loginResponse });
+                //return new OkObjectResult(loginResponse);
+
+
             }
             catch(Exception ex)
             {

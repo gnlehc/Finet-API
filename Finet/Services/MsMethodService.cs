@@ -1,6 +1,7 @@
 ﻿using Finet.Helpers;
 using Finet.Model.Requests;
 using Finet.Output;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Finet.Services
@@ -10,13 +11,13 @@ namespace Finet.Services
         public MsMethodHelper methodHelper;
         private ILogger logger;
 
-
         public MsMethodService(MsMethodHelper methodHelper, ILogger<MsUserService> logger) : base()
         {
             this.methodHelper = methodHelper;
             this.logger = logger;
         }
 
+        [Authorize]
         [HttpPost]
         [Route("api/addMethod")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -35,6 +36,7 @@ namespace Finet.Services
             }
         }
 
+        [Authorize]
         [HttpPost]
         [Route("api/deactivateMethod")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -53,6 +55,7 @@ namespace Finet.Services
             }
         }
 
+        [Authorize]
         [HttpPost]
         [Route("api/removeMethod")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -71,6 +74,7 @@ namespace Finet.Services
             }
         }
 
+        [Authorize]
         [HttpGet]
         [Route("api/getListMethod")]
         [ProducesResponseType(StatusCodes.Status200OK)]

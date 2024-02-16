@@ -2,6 +2,7 @@
 using Finet.Model;
 using Finet.Model.Requests;
 using Finet.Output;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Finet.Services
@@ -16,6 +17,7 @@ namespace Finet.Services
             this.logger = logger;
         }
 
+        [Authorize]
         [HttpPost]
         [Route("api/addExpense")]
         [ProducesResponseType(StatusCodes.Status200OK)]
