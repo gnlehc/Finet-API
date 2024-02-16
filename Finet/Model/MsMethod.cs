@@ -4,14 +4,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Finet.Model
 {
-    [Table("MsAccount")]
-    public class MsAccount
+    [Table("MsMethod")]
+    public class MsMethod
     {
         [Key]
-        [Column("AccountID")]
-        public int AccountId { get; set; }
-        [Column("AccountName")]
-        public string AccountName { get; set; }
+        [Column("MethodID")]
+        public int MethodID { get; set; }
+        [Column("MethodName")]
+        public string MethodName { get; set; }
         [Column("Stsrc")]
         public string? Stsrc { get; set; }
     }

@@ -14,34 +14,40 @@ SELECT *FROM MsUser;
 
 CREATE TABLE TrExpense(
 	[ExpenseID] UNIQUEIDENTIFIER PRIMARY KEY,
-	[AccountID] INT FOREIGN KEY REFERENCES MsAccount(AccountID),
-	[CategoryID] INT FOREIGN KEY REFERENCES MsCategory(CategoryID),
+	[MethodID] INT FOREIGN KEY REFERENCES MsMethod(MethodID),
+	[ECategoryID] INT FOREIGN KEY REFERENCES MsExpenseCategory(ECategoryID),
 	[Title] VARCHAR(255),
 	[Description] VARCHAR(255),
+	[Amount] INT,
 	[Time] DATETIME,
 	[Stsrc] VARCHAR(1)
 );
 
 SELECT *FROM TrExpense;
 
-CREATE TABLE MsAccount(
-    [AccountID] INT PRIMARY KEY IDENTITY(1,1),
-    [AccountName] VARCHAR(255),
+CREATE TABLE MsMethod(
+    [MethodID] INT PRIMARY KEY IDENTITY(1,1),
+    [MethodName] VARCHAR(255),
 	[Stsrc] VARCHAR(1)
 );
 
-SELECT *FROM MsAccount;
+SELECT *FROM MsMethod;
 
-CREATE TABLE MsCategory(
-	[CategoryID] INT PRIMARY KEY IDENTITY(1,1),
-	[CategoryName] VARCHAR(255),
+CREATE TABLE MsExpenseCategory(
+	[ECategoryID] INT PRIMARY KEY IDENTITY(1,1),
+	[ECategoryName] VARCHAR(255),
 	[Stsrc] VARCHAR(1)
 );
 
-SELECT *FROM MsCategory;
+SELECT *FROM MsExpenseCategory;
+
+-- SELECT TABLE
+SELECT *FROM TrExpense;
+SELECT *FROM MsExpenseCategory;
+SELECT *FROM MsMethod;
 
 --DROP TABLE
 DROP TABLE MsUser;
 DROP TABLE TrExpense;
-DROP TABLE MsCategory;
-DROP TABLE MsAccount;
+DROP TABLE MsExpenseCategory;
+DROP TABLE MsMethod;

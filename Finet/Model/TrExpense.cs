@@ -9,14 +9,16 @@ namespace Finet.Model
         [Key]
         [Column("ExpenseID")]
         public Guid ExpenseID { get; set; }
-        [ForeignKey("AccountID")]
-        public int AccountID { get; set; }
-        [ForeignKey("CategoryID")]
-        public int CategoryID { get; set; }
+        [ForeignKey("MethodID")]
+        public int MethodID { get; set; }
+        [ForeignKey("ECategoryID")]
+        public int ECategoryID { get; set; }
         [Column("Title")]
         public string? Title { get; set; }
         [Column("Description")]
         public string? Description { get; set; }
+        [Column("Amount")]
+        public int Amount { get; set;}
         [Column("Time")]
         public DateTime Time { get; set; }
         [Column("Stsrc")]

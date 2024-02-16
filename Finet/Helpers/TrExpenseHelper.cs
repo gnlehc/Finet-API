@@ -20,23 +20,63 @@ namespace Finet.Helpers
            
             try
             {
-                var context = finetContext.TrExpense.Where(t => t.AccountID == req.AccountID && t.CategoryID == req.CategoryID)
-                    .Select(t => new TrExpense()
-                    {
-                        ExpenseID = new Guid(),
-                        AccountID = t.AccountID,
-                        CategoryID = t.CategoryID,
-                        Title = t.Title,
-                        Description = t.Description,
-                        Stsrc = "A",
-                        Time = DateTime.Now
-                    }).ToList();
-              
-                return new BaseOutput()
+                /*var query = from m in finetContext.MsMethod
+                            join e in finetContext.TrExpense
+                            on m.MethodID equals e.MethodID
+                            join c in finetContext.MsExpenseCategory
+                            on e.ECategoryID equals c.ECategoryID
+                            where m.MethodID == req.MethodID && c.ECategoryID == req.ECategoryID
+                            select new TrExpense()
+                            {
+                                ExpenseID = Guid.NewGuid(),
+                                MethodID = req.MethodID,
+                                ECategoryID = req.ECategoryID,
+                                Amount = req.Amount,
+                                Title = req.Title,
+                                Description = req.Description,
+                                Stsrc = "A",
+                                Time = DateTime.Now,
+                            };*/
+                /*foreach (var expense in query)
                 {
-                    StatusCode = 200,
-                    ErrorMessage = "Success"
-                };
+                    finetContext.TrExpense.Add(expense);
+                }
+                finetContext.SaveChanges();*/
+
+
+                // cek if request MethodID dan ECategoryID exists
+                var methodExists = finetContext.MsMethod.Any(m => m.MethodID == req.MethodID);
+                var categoryExists = finetContext.MsExpenseCategory.Any(c => c.ECategoryID == req.ECategoryID);
+                if (!methodExists || !categoryExists)
+                {
+                    return new BaseOutput()
+                    {
+                        StatusCode = 400, // Bad Request
+                        ErrorMessage = "MethodID or ECategoryID not found"
+                    };
+                }
+                else
+                {
+                    var newExpense = new TrExpense()
+                    {
+                        ExpenseID = Guid.NewGuid(),
+                        MethodID = req.MethodID,
+                        ECategoryID = req.ECategoryID,
+                        Amount = req.Amount,
+                        Title = req.Title,
+                        Description = req.Description,
+                        Stsrc = "A",
+                        Time = DateTime.Now,
+                    };
+
+                    finetContext.TrExpense.Add(newExpense);
+                    finetContext.SaveChanges();
+                    return new BaseOutput()
+                    {
+                        StatusCode = 200,
+                        ErrorMessage = "Success"
+                    };
+                }
             }
             catch (Exception ex)
             {
@@ -60,11 +100,11 @@ namespace Finet.Helpers
             try
             {
                 var query = finetContext.TrExpense
-                    .Include(e => e.AccountID)
-                    .Include(e => e.CategoryID)
+                    .Include(e => e.MethodID)
+                    .Include(e => e.ECategoryID)
                     .OrderBy(e => e.Time)
                     .Skip((page - 1) * take)
-                    .Take(take); ;
+                    .Take(take);
                 var totalData = query.Count();
                 var totalPage = totalData / take;
                 if (totalData % take != 0)

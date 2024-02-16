@@ -19,10 +19,10 @@ builder.Services.AddCors(options =>
 });
 builder.Services.AddScoped<MsUserHelper>();
 builder.Services.AddScoped<MsUserService>();
-builder.Services.AddScoped<MsCategoryHelper>();
-builder.Services.AddScoped<MsCategoryService>();
-builder.Services.AddScoped<MsAccountHelper>();
-builder.Services.AddScoped<MsAccountService>();
+builder.Services.AddScoped<MsExpenseCategoryHelper>();
+builder.Services.AddScoped<MsExpenseCategoryService>();
+builder.Services.AddScoped<MsMethodHelper>();
+builder.Services.AddScoped<MsMethodService>();
 builder.Services.AddScoped<TrExpenseHelper>();
 builder.Services.AddScoped<TrExpenseService>();
 builder.Services.AddControllers();

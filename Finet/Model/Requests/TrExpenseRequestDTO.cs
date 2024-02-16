@@ -2,12 +2,11 @@
 {
     public class TrExpenseRequestDTO
     {
-        public int AccountID { get; set; }
-        public int CategoryID { get; set;}
+        public int MethodID { get; set; }
+        public int ECategoryID { get; set;}
         public string Title { get; set;}
         public string? Description { get; set;}
-        //public int? Page { get; set; }
-        //public int? Take { get; set; }
+        public int Amount { get; set;}
     }
     public class GetListTrExpenseRequestDTO 
     {
