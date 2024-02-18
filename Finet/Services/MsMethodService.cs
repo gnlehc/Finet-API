@@ -17,7 +17,6 @@ namespace Finet.Services
             this.logger = logger;
         }
 
-        [Authorize]
         [HttpPost]
         [Route("api/addMethod")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -36,7 +35,6 @@ namespace Finet.Services
             }
         }
 
-        [Authorize]
         [HttpPost]
         [Route("api/deactivateMethod")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -55,7 +53,6 @@ namespace Finet.Services
             }
         }
 
-        [Authorize]
         [HttpPost]
         [Route("api/removeMethod")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -74,7 +71,6 @@ namespace Finet.Services
             }
         }
 
-        [Authorize]
         [HttpGet]
         [Route("api/getListMethod")]
         [ProducesResponseType(StatusCodes.Status200OK)]

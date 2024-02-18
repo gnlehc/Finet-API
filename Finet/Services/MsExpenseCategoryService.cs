@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Finet.Services
 {
+    [ApiController]
+    [Route("api/")]
     public class MsExpenseCategoryService : ControllerBase
     {
         public MsExpenseCategoryHelper ECategoryHelper;
@@ -18,8 +20,9 @@ namespace Finet.Services
             this.logger = logger;
         }
 
+        [Authorize]
         [HttpPost]
-        [Route("api/addExpenseCategory")]
+        [Route("addExpenseCategory")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult AddECategory([FromBody] MsExpenseCategoryRequestDTO req)
         {
@@ -36,8 +39,9 @@ namespace Finet.Services
             }
         }
 
+        [Authorize]
         [HttpPost]
-        [Route("api/deactivateExpenseCategory")]
+        [Route("deactivateExpenseCategory")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult DeactivateECategory([FromBody] MsExpenseCategoryRequestDTO req)
         {
@@ -54,8 +58,9 @@ namespace Finet.Services
             }
         }
 
+        [Authorize]
         [HttpPost]
-        [Route("api/removeExpenseCategory")]
+        [Route("removeExpenseCategory")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult RemoveECategory([FromBody] MsExpenseCategoryRequestDTO req)
         {
@@ -72,8 +77,9 @@ namespace Finet.Services
             }
         }
 
+        [Authorize]
         [HttpGet]
-        [Route("api/getListExpenseCategory")]
+        [Route("getListExpenseCategory")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult GetListExpenseCategory()
         {

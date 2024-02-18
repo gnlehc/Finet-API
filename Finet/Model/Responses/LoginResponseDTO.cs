@@ -4,7 +4,7 @@
     {
         public int StatusCode { get; set; }
         public string? ErrorMessage { get; set; }
-        public Guid Id { get; set; }
+        public Guid UserID { get; set; }
         public string? Username { get; set; }
     }
 }

@@ -19,7 +19,7 @@ CREATE TABLE TrExpense(
 	[Title] VARCHAR(255),
 	[Description] VARCHAR(255),
 	[Amount] INT,
-	[Time] DATETIME,
+	[CreatedAt] DATETIME,
 	[Stsrc] VARCHAR(1)
 );
 

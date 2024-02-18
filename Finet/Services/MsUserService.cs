@@ -5,10 +5,13 @@ using Finet.Output;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 
 namespace Finet.Services
 {
+    [ApiController]
+    [Route("api/")]
     public class MsUserService : ControllerBase
     {
         public MsUserHelper _userHelper;
@@ -22,7 +25,7 @@ namespace Finet.Services
         }
 
         [HttpPost]
-        [Route("api/register")]
+        [Route("register")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult UserRegister([FromBody] RegisterRequestDTO request)
         {
@@ -40,32 +43,39 @@ namespace Finet.Services
         }
 
         [HttpPost]
-        [Route("api/login")]
+        [Route("login")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult UserLogin([FromBody] LoginRequestDTO request)
         {
             try
             {
-                LoginResponseDTO loginResponse = new LoginResponseDTO();
-                loginResponse = _userHelper.LoginHelper(request);
+                IActionResult response = Unauthorized();
+                LoginResponseDTO loginResponse = _userHelper.LoginHelper(request);
+
                 var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
                 var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-                var Sectoken = new JwtSecurityToken(_config["Jwt:Issuer"],
-                  _config["Jwt:Issuer"],
-                  null,
-                  expires: DateTime.Now.AddMinutes(120),
-                  signingCredentials: credentials);
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new[]
+                    {
+                        new Claim("userID", loginResponse.UserID.ToString()),
+                    }),
+                    Expires = DateTime.UtcNow.AddMinutes(120),
+                    SigningCredentials = credentials,
+                    Audience = _config["Jwt:Audience"], 
+                    Issuer = _config["Jwt:Issuer"]
+                };
 
-                var token = new JwtSecurityTokenHandler().WriteToken(Sectoken);
-                return Ok(new { Token = token, Data = loginResponse });
-                //return new OkObjectResult(loginResponse);
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+                var tokenString = tokenHandler.WriteToken(token);
 
-
+                return Ok(new { Token = tokenString, Data = loginResponse });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                logger.LogInformation("Error occured: " + ex.ToString());
+                logger.LogInformation("Error occurred: " + ex.ToString());
                 return StatusCode(500, new BaseOutput(ex));
             }
         }

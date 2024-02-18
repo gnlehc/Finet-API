@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Finet.Services
 {
+    [ApiController]
+    [Route("api/")]
     public class TrExpenseService : ControllerBase
     {
         public TrExpenseHelper trExpenseHelper;
@@ -19,7 +21,7 @@ namespace Finet.Services
 
         [Authorize]
         [HttpPost]
-        [Route("api/addExpense")]
+        [Route("addExpense")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult AddExpense([FromBody] TrExpenseRequestDTO req)
         {
