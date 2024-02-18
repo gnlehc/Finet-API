@@ -1,6 +1,7 @@
 ﻿using Finet.Helpers;
 using Finet.Model.Requests;
 using Finet.Output;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Finet.Services
@@ -9,7 +10,6 @@ namespace Finet.Services
     {
         public MsMethodHelper methodHelper;
         private ILogger logger;
-
 
         public MsMethodService(MsMethodHelper methodHelper, ILogger<MsUserService> logger) : base()
         {

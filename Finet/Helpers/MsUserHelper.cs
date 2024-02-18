@@ -102,7 +102,7 @@ namespace Finet.Helpers
                 {
                     response.StatusCode = 200;
                     response.ErrorMessage = "Log in Successful.";
-                    response.Id = user.UserID;
+                    response.UserID = user.UserID;
                     response.Username = user.Username;
                 }
                 else

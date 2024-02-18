@@ -14,7 +14,7 @@ namespace Finet.Model
         public string? Username { get; set; }
 
         [Column("Email")]
-        public string? Email { get; set; }
+        public string Email { get; set; }
 
         [Column("Password")]
         public string? Password { get; set; }
